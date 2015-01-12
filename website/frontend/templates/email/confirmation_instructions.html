@@ -1,0 +1,9 @@
+{% extends "email/layout.html" %}
+
+{% block content %}
+<p>Welcome {{ user.email }}!</p>
+
+<p>Please confirm your email through the link below:</p>
+
+<p><a href="{{ confirmation_link }}">Confirm my account</a></p>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "wtf.html" as wtf %}
+
+{% macro render_pagination(pagination) %}
+  <div class="pagination">
+    <ul>
+      {%- for page in pagination.iter_pages() %}
+        <li {% if page == pagination.page %}class="active"{% endif %}>
+          {% if page %}
+              <a href="{{ url_for_other_page(page) }}" class="grey-button">{{ page }}</a>
+          {% else %}
+            <span class=ellipsis>…</span>
+          {% endif %}
+        </li>
+      {%- endfor %}
+    </ul>
+  </div>
+{% endmacro %}

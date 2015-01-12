@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Edit User</h1>
+</div>
+{{ wtf.quick_form(form, action = request.path) }}
+{% endblock %}

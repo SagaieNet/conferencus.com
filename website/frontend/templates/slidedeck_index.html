@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}Talks{% endblock %}
+
+{% block content %}
+<div class="row showcase">
+    <div class="content">
+        <div class="left-column">
+            <h1>Talks</h1>
+            <h3>Here are some of the most recent talks.</h3>
+        </div>
+        <div class="right-column search-bar">
+            <form class="pure-form">
+                <button type="submit" class="pure-button">Search</button>
+                <input type="text" name="search" value="{% if search %}{{ search }}{% endif %}" class="pure-input-rounded">
+            </form>
+        </div>
+        <span class="clearfix"></span>
+        <hr>
+
+        <div class="talks">
+        {% for presentation in presentations.items %}
+            {% include "slidedeck_presentation_partial.html" %}
+        {% endfor %}
+        </div>
+
+        <div class="see-more">
+            {% if presentations %}
+            {{ render_pagination(presentations) }}
+            {% endif %}
+            <hr>
+        </div>
+    </div>
+</div>
+{% endblock %}

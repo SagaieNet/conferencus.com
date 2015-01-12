@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Talk{% endblock %}
+
+{% block content %}
+<div class="row inner-page">
+    <div class="content">
+        <h1>Edit Talk</h1>
+        <h3>
+            {% if not presentation.user.confirmed %}
+                Confirm your email address before you can make this talk public.
+            {% else %}
+                <a href="{{ url_for('user.edit') }}">Update your speaker profile</a> if you haven't done so yet.
+            {% endif %}
+        </h3>
+        <hr />
+        {{ wtf.quick_form(form, action = request.path, enctype = 'multipart/form-data') }}
+
+        <h4>Events</h4>
+        <h3>
+            Provide details about the events this talk was presented at. <a href="{{ url_for('slidedeck.event_add', id=presentation.id, url=presentation.url) }}">Add one here</a>.
+        </h3>
+        <hr />
+        <ul>
+            {% for event in events %}
+            <li><strong>{{ event.title }}</strong> on {{ event.presented | dateformat('long') }}. <a href="{{ url_for('slidedeck.event_edit', id=presentation.id, url=presentation.url, event_id=event.id) }}">Edit</a> or <a href="{{ url_for('slidedeck.event_delete', id=presentation.id, url=presentation.url, event_id=event.id) }}">Delete</a></li>
+            {% endfor %}
+        </ul>
+
+        <h4>Links</h4>
+        <h3>
+            Provide additional links relevant to this talk. <a href="{{ url_for('slidedeck.link_add', id=presentation.id, url=presentation.url) }}">Add one here</a>.
+        </h3>
+        <hr />
+        <ul>
+            {% for link in links %}
+            <li><strong>{{ link.title }}</strong> linking to {{ link.link }}. <a href="{{ url_for('slidedeck.link_edit', id=presentation.id, url=presentation.url, link_id=link.id) }}">Edit</a> or <a href="{{ url_for('slidedeck.link_delete', id=presentation.id, url=presentation.url, link_id=link.id) }}">Delete</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

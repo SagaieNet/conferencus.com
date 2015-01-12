@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html{% block html_attribs %} lang="en"{% endblock html_attribs %}>
+{%- block html %}
+  <head>
+  {%- block head %}
+    <meta charset="utf-8">
+    <title>{% block title %}{{title}}{% endblock title %}</title>
+    {%- block meta %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {%- endblock meta %}
+
+    {%- block style %}
+    {% assets filters="cssmin", output="css/packed.css",
+          "css/bootstrap.min.css", "css/bootstrap-theme.min.css", "css/font-awesome.min.css" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename = 'img/logo.png') }}" />
+    {%- block style_navbar_padding %}
+    <style>
+      body > .container {
+        padding: 60px 15px 0;
+      }
+    </style>
+    {%- endblock style_navbar_padding %}
+    {%- endblock style %}
+
+    {%- block favicons %}
+    {%- endblock favicons %}
+
+  {%- endblock head %}
+  </head>
+
+  <body>
+  {%- block body %}
+    {%- block body_content %}
+    {%- endblock body_content %}
+    {%- block bootstrap_js_bottom %}
+    {% assets filters="jsmin", output="js/packed.js",
+          "js/jquery.min.js", "js/bootstrap.min.js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {%- block script_bottom %}
+    {%- endblock script_bottom %}
+    {%- endblock bootstrap_js_bottom %}
+  {%- endblock body %}
+  </body>
+{%- endblock html %}
+</html>

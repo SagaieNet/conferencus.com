@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}Upload{% endblock %}
+
+{% block content %}
+<div class="row inner-page">
+    <div class="content">
+        <h1>Upload</h1>
+        <h3>You will be able to provide more information while we process the slides.</h3>
+        <hr />
+        {{ wtf.quick_form(form, action = url_for('slidedeck.upload'), enctype = 'multipart/form-data', buttons = [('submit', 'primary', 'Upload')]) }}
+    </div>
+</div>
+{% endblock %}

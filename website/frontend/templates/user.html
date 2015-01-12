@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ user.display_name }}{% endblock %}
+
+{% block description %}{{ user.bio | default("", True)| truncate(300) }}{% endblock %}
+
+{% if user.has_image %}
+{% block share_image %}{{ url_for('user.image', username = user.username, _external=True) }}{% endblock %}
+{% endif %}
+
+{% block content %}
+<section id="main">
+<div class="row user">
+    <div class="decoration-left"></div>
+    <div class="decoration-right"></div>
+
+    <div class="content">
+        <div class="myprofile-left">
+            {% if user.has_image %}
+                <img src="{{ url_for('user.image', username = user.username) }}{% if user.image_md5 %}?{{ user.image_md5 }}{% endif %}" alt="{{ user.display_name }} avatar" />
+            {% else %}
+                <img src="{{ url_for('static', filename = 'img/profile.jpg') }}" alt="{{ user.display_name }} avatar" />
+            {% endif %}
+        </div>
+
+        <div class="myprofile-right">
+            <h1>{{ user.display_name }}</h1>
+
+            {% if user.social_twitter or user.social_facebook or user.social_github %}
+            <div class="left">
+            <h5>SOCIAL</h5>
+            <p>
+                {% if user.social_twitter %}
+                    <a href="{{ user.social_twitter|urlquote }}">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                {% endif %}
+                {% if user.social_facebook %}
+                    <a href="{{ user.social_facebook|urlquote }}">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                {% endif %}
+                {% if user.social_github %}
+                    <a href="{{ user.social_github|urlquote }}">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                {% endif %}
+            </p>
+            </div>
+            {% endif %}
+
+            <span class="clearfix"></span>
+
+            {% if user.bio %}
+                <h5>BIO</h5>
+                {{ user.bio | nl2br }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row showcase showcase-main">
+    <div class="content">
+{% if pending|length > 0 %}
+        <h4><img src="{{ url_for('static', filename = 'img/icons/heart.png') }}" alt="Heart" />Pending Talks</h4>
+        <h3>These talks are not published yet.</h3>
+        <hr>
+
+        <div class="talks">
+        {% for presentation in pending %}
+            {% include "slidedeck_presentation_partial.html" %}
+        {% endfor %}
+        </div>
+
+        <span class="clearfix"></span>
+{% endif %}
+
+{% if presentations %}
+        <h4><img src="{{ url_for('static', filename = 'img/icons/heart.png') }}" alt="Heart" />Most Recent Talks</h4>
+        <h3>Here are some of the most recent talks.</h3>
+        <hr>
+
+        <div class="talks">
+        {% for presentation in presentations %}
+            {% include "slidedeck_presentation_partial.html" %}
+        {% endfor %}
+        </div>
+{% endif %}
+    </div>
+</div>
+</section>
+{% endblock %}

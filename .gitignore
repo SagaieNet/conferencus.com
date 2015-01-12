@@ -1,0 +1,10 @@
+*.pyc
+venv
+*~
+.DS_Store
+*.swp
+.vagrant
+example.db
+
+.webassets-cache
+packed.*

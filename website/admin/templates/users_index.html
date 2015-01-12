@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Users</h1>
+</div>
+
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Confirmed</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users.items %}
+    <tr>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>{% if user.confirmed %}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</td>
+      <td><a href="{{ url_for('users.edit', id=user.id) }}"><i class="fa fa-edit"></i></a> <a href="{{ url_for('users.delete', id=user.id) }}"><i class="fa fa-trash-o"></i></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if users %}
+{{ render_pagination(users) }}
+{% endif %}
+
+{% endblock %}

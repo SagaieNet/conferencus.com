@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Add Link{% endblock %}
+
+{% block content %}
+<div class="row inner-page">
+    <div class="content">
+        <h1>Add Link</h1>
+        <h3>
+        </h3>
+        <hr />
+        {{ wtf.quick_form(form, action = request.path) }}
+    </div>
+</div>
+{% endblock %}
