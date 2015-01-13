@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Because you shouldn't have to fly 1000 miles to learn something new. After going to many conferences we realized something. A lot of great content gets produced that will never sees the outside world. We want to make the experience better.">
+
+    <title>{% if page.title %}{{ page.title }}{% else %}Competitor Price Monitoring for e-commerce stores{% endif %} // Conferencus.com</title>
+
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/pure-min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/royalslider.css" />
+    <link rel="stylesheet" href="css/rs-default.css" />
+    <link rel="stylesheet" href="css/slidedeck.css" />
+
+    <link rel="icon" type="image/png" href="img/logo.png" />
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="row top">
+        <div class="content">
+          <a href="/" class="logo"><img src="img/logo.png" alt="Conferencus.com logo" /> CONFERENCUS.COM</a>
+
+          <a href="#" id="responsive-menu"></a>
+          <nav>
+            <ul id="main-menu">
+              <li><a href=".">HOME</a></li>
+              <li><a {% if page.url == '/about.html' %}class="active"{% endif %} href="about.html">ABOUT</a></li>
+              <li><a {% if page.url == '/talks.html' %}class="active"{% endif %} href="talks.html">TALKS</a></li>
+            </ul>
+
+            <ul id="login">
+              <li><a {% if page.url == '/register.html' %}class="active"{% endif %} href="register.html">REGISTER</a></li>
+              <li><a {% if page.url == '/login.html' %}class="active"{% endif %} href="login.html">LOG IN</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      {{ content }}
+
+      <div class="row foot">
+        <div class="content">
+          <p>MADE WITH <img src="img/icons/heart.png" alt="LOVE"> IN NYC</p>
+
+          <ul>
+            <li><a href="copyrights.html">COPYRIGHTS</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.royalslider.min.js"></script>
+    <script type="text/javascript" src="js/core.js"></script>
+    <script type="text/javascript" src="js/slidedeck.js"></script>
+  </body>
+</html>
